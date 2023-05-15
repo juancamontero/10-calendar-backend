@@ -12,7 +12,7 @@ const app = express();
 dbConnection();
 
 //CORS
-app.use(cors())
+app.use(cors());
 
 // Public directory
 app.use(express.static("./public"));
@@ -21,10 +21,12 @@ app.use(express.static("./public"));
 app.use(express.json());
 
 // 2. Define routes
-// TODO Auth: create, login, logout, edit . token renew
+//  Auth: create, login, logout, edit . token renew
 app.use("/api/auth", require("./routes/auth"));
 
-// TODO: CRUD of the events
+// Events:  CRUD of the events
+app.use("/api/events", require("./routes/events"));
+
 
 // 3. listen for requests
 app.listen(process.env.PORT, () => {
