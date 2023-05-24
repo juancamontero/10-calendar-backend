@@ -3,7 +3,7 @@ require("dotenv").config();
 const cors = require("cors");
 const { dbConnection } = require("./database/config");
 
-// console.log(process.env.PORT);
+const path = require("path");
 
 // 1. create express server
 const app = express();
@@ -15,7 +15,7 @@ dbConnection();
 app.use(cors());
 
 // Public directory
-app.use(express.static("./public"));
+app.use(express.static(path.join(__dirname, "public")));
 
 // read and body parsing
 app.use(express.json());
@@ -27,10 +27,9 @@ app.use("/api/auth", require("./routes/auth"));
 // 3. Events:  CRUD of the events
 app.use("/api/events", require("./routes/events"));
 
-
 //* Redirect to public any other request
-app.get("*", (req, res) => {
-  res.sendFile(__dirname + "/public/index.html");
+app.get("/*", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
 // 4. listen for requests
