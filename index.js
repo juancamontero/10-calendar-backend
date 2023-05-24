@@ -24,11 +24,15 @@ app.use(express.json());
 //  Auth: create, login, logout, edit . token renew
 app.use("/api/auth", require("./routes/auth"));
 
-// Events:  CRUD of the events
+//* Redirect to public any other request
+app.get("*", (req, res) => {
+  res.sendFile(__dirname + "/public/index.html");
+});
+
+// 3. Events:  CRUD of the events
 app.use("/api/events", require("./routes/events"));
 
-
-// 3. listen for requests
+// 4. listen for requests
 app.listen(process.env.PORT, () => {
   console.log(`Server is listening on port ${process.env.PORT}`);
 });
