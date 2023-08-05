@@ -15,10 +15,13 @@ dbConnection();
 app.use(cors());
 
 // Public directory
-app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname, "/public")));
 
 // read and body parsing
 app.use(express.json());
+
+
+
 
 // 2. Define routes
 //  Auth: create, login, logout, edit . token renew
@@ -28,9 +31,12 @@ app.use("/api/auth", require("./routes/auth"));
 app.use("/api/events", require("./routes/events"));
 
 //* Redirect to public any other request
-app.get("/*", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "index.html"));
-});
+// app.get("/*", (req, res) => {
+//   res.sendFile(path.join(__dirname, "/public", "index.html"));
+//   // res.redirect("index.html");
+// });
+
+
 
 // 4. listen for requests
 app.listen(process.env.PORT, () => {

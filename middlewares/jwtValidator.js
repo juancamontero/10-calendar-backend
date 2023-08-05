@@ -4,6 +4,7 @@ const jwt = require("jsonwebtoken");
 const jwtValidator = (req, res = response, next) => {
   // x-token headers
   const token = req.header("x-token");
+  console.log(token);
 
   // did i received the token?
   if (!token) {
@@ -18,7 +19,6 @@ const jwtValidator = (req, res = response, next) => {
     // * modifico el req con el resultado de la validación del token
     req.uid = uid;
     req.name = name;
-
   } catch (error) {
     return res.status(401).json({
       ok: false,
